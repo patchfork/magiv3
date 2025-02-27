@@ -1,5 +1,5 @@
 {
-  "_name_or_path": "/work/rs/logs/magiv3/final_weights",
+  "_name_or_path": "magiv3",
   "architectures": [
     "Florence2ForConditionalGeneration"
   ],
