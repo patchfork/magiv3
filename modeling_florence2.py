@@ -3021,7 +3021,6 @@ class Florence2ForConditionalGeneration(Florence2PreTrainedModel):
                 continue
             
             # if, however, there is a deviation find the maximum prefix that matches in the batch
-            # import pdb; pdb.set_trace()
 
             predicted_next_tokens = predicted_next_tokens[:, 0]
             predicted_next_token_strings = processor.batch_decode(predicted_next_tokens)
@@ -3033,8 +3032,8 @@ class Florence2ForConditionalGeneration(Florence2PreTrainedModel):
                     running_indices[i] += 1
                     if running_indices[i] >= decoder_input_ids.shape[1]:
                         next_tokens_to_concat.append(torch.tensor(processor.tokenizer.eos_token_id, device=self.device))
-                    elif "’" in pnts:
-                        import pdb; pdb.set_trace()
+                    # elif "’" in pnts: # this is an annoying character which looks like ' (apostrophe) but isn't.
+                    #     import pdb; pdb.set_trace()
                     else:
                         next_tokens_to_concat.append(decoder_input_ids[i, running_indices[i]])
             next_tokens_to_concat = torch.stack(next_tokens_to_concat)[:, None]
