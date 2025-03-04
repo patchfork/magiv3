@@ -2758,7 +2758,7 @@ class Florence2ForConditionalGeneration(Florence2PreTrainedModel):
         results = []
 
         for generated_text, batch_indices_of_bboxes_in_generated_text, list_of_list_of_bboxes in zip(generated_texts, batch_indices_of_bboxes_in_generated_text, list_of_list_of_list_of_bboxes):
-            categories = [map_to_category[generated_text[j:j+3]] for i, j in batch_indices_of_bboxes_in_generated_text]
+            categories = [map_to_category.get(generated_text[j:j+3], None) for i, j in batch_indices_of_bboxes_in_generated_text]
             result_for_this_image = {
                 "panels": [],
                 "texts": [],
@@ -2766,6 +2766,8 @@ class Florence2ForConditionalGeneration(Florence2PreTrainedModel):
                 "tails": [],
             }
             for category, list_of_bboxes in zip(categories, list_of_list_of_bboxes):
+                if category is None:
+                    continue
                 result_for_this_image[category].extend(list_of_bboxes)
             results.append(result_for_this_image)
 
