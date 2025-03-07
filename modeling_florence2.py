@@ -2791,7 +2791,7 @@ class Florence2ForConditionalGeneration(Florence2PreTrainedModel):
             results[img_idx]["character_cluster_labels"] = character_cluster_labels
             results[img_idx]["text_character_associations"] = text_character_association
             results[img_idx]["text_tail_associations"] = text_tail_association
-            results[img_idx]["is_essential_texts"] = essential_text_logits
+            results[img_idx]["is_essential_text"] = essential_text_logits
 
         return results
     
